@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+{% include '_menu.html' %}
+
+<div class="container mt-4">
+    <h1 class="text-center">{{operacion}}</h1>
+    <br>
+    <hr>
+  <form action="/procesar_viaje" method="post">
+    <div class="row g-2 mt-3">
+      <div class="col-md-12 col-lg-8 mt-3 mb-3 pb-3" style="margin:0 auto;">
+        <div class="mb-3">
+          <label for="destino" class="form-label">Destino</label>
+          <input value="{{datos_viaje.destino}}" type="text" class="form-control" required name="destino">
+        </div>
+        <div class="mb-3">
+          <label for="descripcion" class="form-label">Descripcion</label>
+          <textarea  rows="4" cols="50"  class="form-control" required name="descripcion" id="descripcion" style="resize:none;" >{{datos_viaje.descripcion}}</textarea>
+        </div>
+        <div class="mb-3">
+          <label for="fecha_inicio" class="form-label">Fecha de Inicio</label>
+          <input value="{{datos_viaje.fecha_inicio}}" class="form-control" type="date" name="fecha_inicio" required>
+        </div>
+        <div class="mb-3">
+          <label for="fecha_fin" class="form-label">Fecha de Fin</label>
+          <input value="{{datos_viaje.fecha_fin}}" class="form-control" type="date" name="fecha_fin" required>
+        </div>
+
+        <br>
+
+        <div>
+          <input type="hidden" name="id" value="{{datos_viaje.id}}">
+          <input type="hidden" name="operacion" value="{{operacion}}">
+          <button type="submit" class="btn btn-primary">Grabar</button>
+          <a href="/" class="btn btn-danger">Cancelar</a>
+        </div>
+
+      </div>
+    </div>
+
+
+</form>
+
+
+</div>
+
+{% endblock %}

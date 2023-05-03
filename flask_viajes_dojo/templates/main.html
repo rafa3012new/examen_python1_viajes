@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Dashboard Principal{% endblock %}
+
+{% block contenido %}
+
+{% include '_menu.html' %}
+
+<div class="container mt-5">
+    <h1>Bienvenidos al Dashboard del Sistema : {{sistema}} </h1>
+    <hr>
+    <div style="text-align:right; padding:0; margin:0;"><a href="/crearviaje" style="padding:0; margin:0;">Agregar Viaje</a></div>
+    <div class="row g-2 mt-4 " style="min-height:250px;">
+      <div class="col-md-12 col-lg-12 col-md mb-2 border">
+        <div class="p-3 mb-2 recetas" style="min-height: 200px;">
+          <h2 style="color:rebeccapurple;">Tus viajes Programados : </h2>
+          <hr>
+            <table class="table table-resposive table-striped">
+              <thead class="bg-secondary text-light">
+                <tr>
+                  <th>Destino</th>
+                  <th>Fecha de Inicio</th>
+                  <th>Fecha de Finalizacion</th>
+                  <th>Plan</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for mi_viaje in mis_viajes %}
+                <tr>
+                  <td><a href="/detalle_viaje/{{mi_viaje.id}}/{{mi_viaje.planificador}}">{{mi_viaje.destino}}</a></td>
+                  <td>{{mi_viaje.fecha_inicio}}</td>
+                  <td>{{mi_viaje.fecha_fin}}</td>
+                  <td>{{mi_viaje.descripcion}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-2 mt-4 " style="min-height:250px;">
+      <div class="col-md-12 col-lg-12 col-md mb-2 border">
+        <div class="p-3 mb-2 recetas" style="min-height: 200px;">
+          <h2 style="color:rebeccapurple;">Planes de Viaje de otros usuarios : </h2>
+          <hr>
+            <table class="table table-resposive table-striped">
+              <thead class="bg-secondary text-light">
+                <tr>
+                  <th>Planificador</th>
+                  <th>Destino</th>
+                  <th>Fecha de Inicio</th>
+                  <th>Fecha de Finalizacion</th>
+                  <th>Plan</th>
+                  <th>Opcion</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {% for otro_viaje in otros_viajes %}
+                  <tr>
+                    <td>{{otro_viaje.nombre_planificador}}</td>
+                    <td><a href="/detalle_viaje/{{otro_viaje.id}}/{{otro_viaje.planificador}}">{{otro_viaje.destino}}</a></td>
+                    <td>{{otro_viaje.fecha_inicio}}</td>
+                    <td>{{otro_viaje.fecha_fin}}</td>
+                    <td>{{otro_viaje.descripcion}}</td>
+                    <td><a href="/unirse_viaje/{{otro_viaje.id}}" onclick="return confirm('desea unirse al viaje?')">Unirse al viaje</a></td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+{% endblock %}

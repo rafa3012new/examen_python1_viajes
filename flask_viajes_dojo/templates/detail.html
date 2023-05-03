@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+{% include '_menu.html' %}
+
+<div class="container mt-1">
+  <div><a  href="/" style="font-size: 1.3em;">Regresar</a></div>
+
+  <h1 class="text-center">Detalles del Viaje</h1>
+
+  <hr>
+
+  <div class="row mt-2 ">
+    <div><h3 class="col-8 text-success mb-2" style="margin:0 auto;">Viaje</h3></div>
+
+    <div class="col-8 mt-2 mb-2 border border-1 border-secondary" style="margin:0 auto;">
+      <div><h3 class="text-center text-success">Destino : {{viaje.destino}}</h3></div>
+      <hr>
+        <ul class="lista_detalle_viajes">
+            <li><div>Planificador por:</div><div>{{viaje.nombre_planificador}}</div></li>
+            <li><div>Descripcion:</div><div>{{viaje.descripcion}}</div></li>
+            <li><div>Fecha de Inicio:</div><div>{{viaje.fecha_inicio}}</div></li>
+            <li><div>Fecha de Fin:</div><div>{{viaje.fecha_fin}}</div></li>
+          </ul>
+    </div>
+
+    <div class="col-8 mt-2 mb-2 border border-1 border-secondary" style="margin:0 auto;">
+      <h3 class="text-center text-success"><div>Otros usuarios que se han unido al viaje :</div></h3>
+      <hr>
+        <ul class="lista_detalle_viaje">
+          {%if viaje.participantes|length > 0%}
+             {%for participante in viaje.participantes%}
+                <li>{{participante.nombre_participante}}</li>
+             {%endfor%}
+          {%else%}
+            <li>No hay otros participantes en este viaje</li>
+          {%endif%}
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
